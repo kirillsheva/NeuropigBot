@@ -1,2 +1,2 @@
 # NeuropigBot
-KMA course work
+Бот під'єднується до сервера та починає грати при запуску neuropig.py
