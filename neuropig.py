@@ -40,7 +40,7 @@ if __name__ == '__main__':
                 json=json,
                 headers=headers
         ):
-            logging.info(f'Player Нейросвиня made move {move}')
+            logging.info(f'Player coordinates {move} | ')
 
     async def _get_game(self):
         async with self._session.get(f'{self._api_url}/game') as resp:
@@ -69,9 +69,9 @@ if __name__ == '__main__':
 
             player_turn = 1 if current_game_progress['whose_turn'] == 'RED' else 2
             start = time.time()
-            move = pathFinder.next_move(self._game, 4, player_turn, False)
+            move = pathFinder.next_move(self._game, 1, player_turn, False)
             end = time.time()
-            self._elapsed_time.append(end - start)
+
 
             if not move:
                 break

@@ -100,19 +100,19 @@ class pathFinder:
                 json=json,
                 headers=headers
         ):
-            logging.info(f'Нейросвиня made move {move}')
+            logging.info(f'Move coordinates {move}')
 
 
     async def _play_game(self):
         current_game_progress = await self._get_game()
-        is_finished = current_game_progress['is_finished']
+
         is_started = current_game_progress['is_started']
 
-        while is_started and not is_finished:
+        while is_started:
 
             if current_game_progress['whose_turn'] != self._player['color']:
                 current_game_progress = await self._get_game()
-                is_finished = current_game_progress['is_finished']
+
                 is_started = current_game_progress['is_started']
                 await asyncio.sleep(0.1)
                 continue
@@ -126,7 +126,7 @@ class pathFinder:
 
             current_p_turn = 1 if current_game_progress['whose_turn'] == 'RED' else 2
             start = time.time()
-            move = _get_move(self._game, 3, current_p_turn)
+            move = _get_move(self._game, 1, current_p_turn)
             end = time.time()
             self._elapsed_time.append(end - start)
 
@@ -137,7 +137,6 @@ class pathFinder:
             await self._make_move(move)
 
             current_game_progress = await self._get_game()
-            is_finished = current_game_progress['is_finished']
             is_started = current_game_progress['is_started']
 
     def _s_t(self):
